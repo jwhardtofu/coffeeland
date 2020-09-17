@@ -1,0 +1,13 @@
+{
+  "logo" : "this is logo url test",
+  "menus" : [
+    {
+      "item" : "Home",
+      "url" : ""
+    },
+    {
+      "item" : "Our History",
+      "url" : ""
+    }
+  ]
+}
