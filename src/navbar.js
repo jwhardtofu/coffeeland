@@ -3,6 +3,51 @@ import { Grid, Menu, MenuItem, Button } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import './navbar.css';
 
+class HoverMenu extends React.Component{
+  constructor(props){
+    super(props);
+    this.state = {
+      menuName: null,
+      items: [],
+      url: null,
+      isMenuOpen: false
+    }
+    this.onMouseOver = this.onMouseOver.bind(this);
+  }
+
+  componentDidMount(){
+    this.setState({
+      menuName: this.props.item,
+      items: this.props.menuItem,
+      url: this.props.url
+    })
+  }
+
+  onMouseOver(){
+    this.setState.isMenuOpen = true;
+  }
+
+  render(){
+    const {menuName, items, url, isMenuOpen} = this.state;
+    return(
+      <div>
+        <a href={url}>
+          {menuName}
+        </a>
+        <Menu
+          open={isMenuOpen}
+          
+        />
+        {items.map((item) => 
+          <MenuItem> {item.item} </MenuItem>
+        )
+
+        }
+      </div>
+    )
+  }
+}
+
 class Navbar extends React.Component{
   constructor(props){
     super(props);
@@ -128,10 +173,10 @@ class Navbar extends React.Component{
                     <a href={item.url}>
                       {item.item}
                     </a> :
-                    (<div>
+                    <a href={item.url}>
                       {item.item}
-                    </div>
-                    )
+                    </a>
+                    
                    }
                       
                   </div> 
