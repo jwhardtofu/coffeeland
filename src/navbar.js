@@ -1,4 +1,5 @@
 import React from 'react';
+import './navbar.css';
 
 class Navbar extends React.Component{
   constructor(props){
@@ -7,8 +8,11 @@ class Navbar extends React.Component{
       error: null,
       isLoaded: false,
       logo: null,
-      items: []
+      items: [],
+      bgColor: 'transparent'
     }
+    this.handleScroll = this.handleScroll.bind(this);
+    
   }
 
   componentDidMount(){
@@ -32,6 +36,7 @@ class Navbar extends React.Component{
         
         }
       )*/
+      window.addEventListener('scroll', this.handleScroll);
     const data = {
       "logo" : "this is logo url test",
       "menus" : [
@@ -52,9 +57,30 @@ class Navbar extends React.Component{
     })
   }
 
+  handleScroll(){
+    if (window.pageYOffset > 10){
+      this.setState({
+        bgColor: "#1ec5e5"
+      })
+    }
+    else{
+      this.setState({
+        bgColor: "transparent"
+      })
+    }
+
+  }
+
+
   render() {
     const { error, isLoaded, items, logo } = this.state;
-    return <p> {logo} </p>
+    return (
+      <div class="navbar" style={{"background-color": this.state.bgColor}}>
+
+      <p > {logo} </p>
+      </div>
+    )
+    
   }
 }
 
