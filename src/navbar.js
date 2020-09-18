@@ -6,13 +6,13 @@ class Navbar extends React.Component{
     this.state = {
       error: null,
       isLoaded: false,
-      logo: 'testddd',
+      logo: null,
       items: []
     }
   }
 
   componentDidMount(){
-    console.log(this.state.logo+'ddfdf');
+    //console.log(this.state.logo+'ddfdf');
     /*
     fetch(".data/Navbar.json")
       .then(res => res.json())
@@ -32,8 +32,23 @@ class Navbar extends React.Component{
         
         }
       )*/
+    const data = {
+      "logo" : "this is logo url test",
+      "menus" : [
+        {
+          "item" : "Home",
+          "url" : ""
+        },
+        {
+          "item" : "Our History",
+          "url" : ""
+        }
+      ]
+    };
+
     this.setState({
-      logo: "test"
+      logo: data.logo,
+      menus: data.menus
     })
   }
 
