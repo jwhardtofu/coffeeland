@@ -1,0 +1,22 @@
+.container {
+    position: relative;
+}
+  
+.image {
+    width: 100vw;
+    height: auto !important;
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: 12.5% 12.5% 12.5% 12.5% 12.5% 12.5% 12.5% 12.5%;
+    position: absolute;
+    top: 5%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: max(50%vw, 300px)
+  }
+
+.grid-item {
+    position: relative;
+}
