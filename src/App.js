@@ -1,14 +1,15 @@
 import React from 'react';
-import logo from './logo.svg';
-// import './App.css';
+//import './App.css';
 import Navbar from './navbar.js';
+import Body from './body.js';
+import './newApp.css'
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
+    <div class="bodyContainer">
         <Navbar />
-      </header>
+
+        <Body />
     </div>
   );
 }

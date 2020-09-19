@@ -1,11 +1,86 @@
-.grid-container {
-    display: grid;
-    grid-template-columns: 12.5% 12.5% 12.5% 12.5% 12.5% 12.5% 12.5% 12.5%;
-    padding: 10px;
+@media (max-width: 1199px) {
+    .grid-container {
+      display: none;
+    }
+    
+    .navbar2 {
+        background-color: #352319;
+    }
   }
+
+@media (min-width: 1200px) {
+    .grid-container {
+      display: grid;
+    }
+    .button-container {
+        display: none
+    }
+  }
+
+.navbar{
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index : 1000;  
+    width: 100vw; 
+}
+
+.grid-container {
+    
+    grid-template-columns: 12.5% 12.5% 12.5% 12.5% 12.5% 12.5% 12.5% 12.5%;
+    padding-left: 50px;
+    padding-right: 50Px;
+    position: relative;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+  }
+
 .grid-item {
-margin-left: 50px;
-margin-right: 50px;
-font-size: 13px;
-text-align: center;
+    font-size: 13px;
+    text-align: center;
+    position: relative;
+    top: 30%;
+}
+
+.menuItem {
+    color: #fff;
+
+}
+
+a.menuItem:link {
+    text-decoration: none;
+}
+  
+a:visited {
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+a:active {
+    text-decoration: none;
+}
+
+
+.logoItem {
+    padding: 10px;
+}
+
+.button-container {
+    position: fixed;
+    top: 30px;
+    right: 38px;
+}
+
+.menuIconButton {
+    font-size: 24px;
+    color: white;
+    background-color: #352319;
+    border: none;
+    width: 28.5px;
+    height: 28.5px;
 }

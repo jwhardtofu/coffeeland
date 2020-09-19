@@ -1,6 +1,7 @@
 import React from 'react';
-import { Grid, Menu, MenuItem, Button } from '@material-ui/core';
+import { Grid, Menu, MenuItem, Button, IconButton } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
+import MenuRoundedIcon from '@material-ui/icons/MenuRounded';
 import './navbar.css';
 
 class HoverMenu extends React.Component{
@@ -10,9 +11,11 @@ class HoverMenu extends React.Component{
       menuName: null,
       items: [],
       url: null,
-      isMenuOpen: false
+      isMenuOpen: false,
+      isNavBarVisiable: false
     }
     this.onMouseOver = this.onMouseOver.bind(this);
+    
   }
 
   componentDidMount(){
@@ -26,6 +29,7 @@ class HoverMenu extends React.Component{
   onMouseOver(){
     this.setState.isMenuOpen = true;
   }
+
 
   render(){
     const {menuName, items, url, isMenuOpen} = this.state;
@@ -55,8 +59,15 @@ class Navbar extends React.Component{
       error: null,
       isLoaded: false,
       logo: null,
-      items: []
+      items: [],
+      bgColor: 'transparent',
+      logoPadding: '0',
+      logoWidth: '100%',
+      isNavbarOpen: false
     }
+    this.handleScroll = this.handleScroll.bind(this);
+    this.onClickMenuIcon = this.onClickMenuIcon.bind(this);
+    
   }
 
   data = {
@@ -121,59 +132,63 @@ class Navbar extends React.Component{
   }
 
   componentDidMount(){
-    /*
-    fetch(".data/Navbar.json")
-      .then(res => res.json())
-      .then(
-        (result) => {
-          this.setState({
-            isLoaded: true,
-            items: result.menus,
-            logo: result.logo
-          });
-        },
-        (error) => {
-          this.setState({
-            isLoaded: true,
-            error
-          });
-        
-        }
-      )*/
+    window.addEventListener('scroll', this.handleScroll);
     this.setState({
       logo: this.data.logo,
       items: this.data.menus
     })
   }
 
+  handleScroll(){
+    if (window.pageYOffset > 10){
+      this.setState({
+        bgColor: '#352319',
+        logoPadding: '10px',
+        logoWidth: '65%'
+      })
+    }
+    else{
+      this.setState({
+        bgColor: 'transparent',
+        logoPadding: '0',
+        logoWidth: '100%'
+      })
+    }
+  }
+
+  onClickMenuIcon(){
+    this.setState({
+      isNavbarOpen: true
+    });
+    console.log("clicked")
+  }
+
   render() {
-    const { error, isLoaded, items, logo } = this.state;
+    const { error, isLoaded, items, logo, bgColor, logoPadding,logoWidth } = this.state;
     const classes = makeStyles((theme) => ({
       root: {
         flexGrow: 1,
       },
-      girdItem:{
-       
-      },
     }));
     return(
-      <div className = {classes.root}>
-        <Grid container spacing = {0}>
-          <Grid item xs = {2}>
+      <div className={classes.root} class='navbar' style={{"background-color": bgColor}}>
+        <div class='navbar2'>
+        <Grid container spacing = {0} >
+          <Grid item xs = {2} class='logoItem' >
             <a href="#">
-              <img src={logo} className={classes.img}/>
+              <img src={logo} style={{"width": logoWidth, "padding-left": logoPadding}}/>
             </a>  
           </Grid>
 
-          <Grid container item xs = {10} spacing={0}>
+          <Grid item xs = {9}>
             <div class = 'grid-container'>
               {items.map((item) =>
                   <div key={item.item} value={item.item} class = 'grid-item'>
                     {item.menuItem === undefined ? 
-                    <a href={item.url}>
+                    <a href={item.url} class='menuItem'>
                       {item.item}
                     </a> :
-                    <a href={item.url}>
+                    <a href={item.url} class='menuItem'>
                       {item.item}
                     </a>
                     
@@ -183,7 +198,16 @@ class Navbar extends React.Component{
                 )}
             </div>
           </Grid>
+          <Grid item xs={2} class='button-container'>
+            <Button class='menuIconButton' onclick={this.onClickMenuIcon}>
+              <MenuRoundedIcon />
+            </Button>
+          </Grid>
         </Grid> 
+        </div>
+        <div class='mobileMenu'>
+
+        </div>
       </div>       
     ) 
   }
